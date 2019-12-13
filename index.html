@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/styles.css ">
+</head>
+<body>
+  <div class="images">
+  </div>
+  <script>
+ 
+  window.onload = function () {
+    var images = document.querySelector('.images');
+    function getImage(url) {
+     return new Promise(function(resolve, reject){
+        var img = new Image()
+        img.onload = function()
+        {
+            resolve(url);  
+        } 
+        img.onerror = function(){ 
+            reject(url)
+        }
+        img.src = url;
+        images.append(img)   
+     });
+    }
+
+    async function load() {
+        try{
+            var img1 = await getImage('../images/1.jpg')
+            console.log(img1);
+            var img2 = await getImage('../images/2.jpg')
+            console.log(img2);
+            var img3 = await getImage('../images/3.jpg')
+            console.log(img3);
+
+        } catch(e) {
+            console.log('Unload: ', e)
+        } 
+    }
+
+    load();
+}
+  </script>  
+</body>
+</html>
